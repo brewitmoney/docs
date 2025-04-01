@@ -21,6 +21,15 @@
               "development"
             ]
           },
+            {
+            "group": "User Documentation",
+            "pages": [
+              "users/onboarding",
+              "users/transactions",
+              "users/security",
+              "users/accounts",
+            ]
+          }
           {
             "group": "Essentials",
             "pages": [
@@ -66,11 +75,6 @@
           "anchor": "Community",
           "href": "https://x.com/brewitmoney",
           "icon": "twiiter"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
         }
       ]
     }
@@ -83,13 +87,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:hello@zenguard.xyz"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "App",
+      "href": "https://app.brewit.money"
     }
   },
   "footer": {
