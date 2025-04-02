@@ -18,7 +18,7 @@
         }
     },
     "paths": {
-        "/badges/{$id}": {
+        "/badges/{id}": {
             "get": {
                 "tags": [
                     "default"
@@ -37,6 +37,15 @@
                             "type": "string"
                         },
                         "example": "8f7d9a62e4b3c1a5902d6h8i7k4m3n2p1"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "1"
                     }
                 ],
                 "responses": {
