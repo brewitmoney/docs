@@ -14,6 +14,10 @@
             "noauthAuth": {
                 "type": "http",
                 "scheme": "noauth"
+            },
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     },
@@ -31,14 +35,6 @@
                 ],
                 "parameters": [
                     {
-                        "name": "x-admin-key",
-                        "in": "header",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "8f7d9a62e4b3c1a5902d6h8i7k4m3n2p1"
-                    },
-                    {
                         "name": "id",
                         "in": "path",
                         "schema": {
@@ -46,6 +42,27 @@
                         },
                         "required": true,
                         "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/badges": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "https://api.brewit.money/badges Copy",
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ],
                 "responses": {

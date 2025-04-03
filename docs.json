@@ -44,21 +44,19 @@
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Brewit API",
         "groups": [
           {
             "group": "API Documentation",
             "pages": [
-              "api-reference/introduction"
+              "brewit-api/introduction"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Badges API",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "brewit-api/badges/get-all",
+              "brewit-api/badges/get"
             ]
           }
         ]
