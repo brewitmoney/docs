@@ -39,6 +39,13 @@
               "technology/subaccounts",
               "technology/deployments"
             ]
+          },
+          {
+            "group": "Legal",
+            "pages": [
+              "legal/terms",
+              "legal/privacy"
+            ]
           }
         ]
       },
