@@ -22,7 +22,7 @@
             {
             "group": "User Documentation",
             "pages": [
-              "users/introduction",
+              "users/overview",
               "users/onboarding",
               "users/transactions",
               "users/security",
@@ -32,7 +32,7 @@
           {
             "group": "Technology Documentation",
             "pages": [
-              "technology/introduction",
+              "technology/overview",
               "technology/accounts",
               "technology/transactions",
               "technology/security",
