@@ -1,0 +1,74 @@
+---
+title: "User Accounts"
+description: "User account creation and authentication"
+---
+
+## Account Creation
+
+Brewit accounts are implemented as Safe Accounts (formerly Gnosis Safe) that comply with ERC-4337 Account Abstraction and ERC-7579 specifications. This implementation provides:
+- Full compatibility with ERC-4337 infrastructure
+- Enhanced security through modular validation
+- Flexible authentication mechanisms
+
+### Technical Implementation
+
+Each Brewit account is deployed as an ERC-7579-enabled Safe Account with the following configuration:
+
+```json
+{
+"owners": ["authenticatedSigner"], // Single owner based on auth method
+"version": "1.4.1",
+"entryPoint": "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789", // EntryPoint v0.7
+"validators": [
+], // Based on auth method
+"executors": [],
+"attesters": [
+"RHINESTONE_ATTESTER", // is the address of the Rhinestone attester
+"ZENGUARD_ATTESTER" // is the address of the Zenguard attester
+],
+"attestersThreshold": 1, // Number of attesters required for module attestation
+"safe4337ModuleAddress": "SAFE_7579_ADAPTER", // is the address of the Safe 7579 adapter module
+"erc7579LaunchpadAddress": "ERC7579_LAUNCHPAD", // is the address of the ERC7579 Launchpad contract
+"safeSingletonAddress": SAFE_SINGLETON // is the address of the Safe Singleton contract
+}
+```
+
+This configuration could be used to generate a Safe Account using library like [permissionless.js](https://docs.pimlico.io/permissionless/how-to/accounts/use-safe-account)
+
+ [Refer contract deployments for more details:](/technology/deployments)
+
+## Authentication Methods
+
+Brewit supports multiple authentication strategies, each implemented with specific security considerations:
+
+### 1. Dynamic Embedded Wallet Authentication
+**Use cases**: Email and Social logins (Google, Twitter, Farcaster)
+
+Technical implementation:
+- Utilizes [Dynamic Embedded Wallets](https://docs.dynamic.xyz/wallets/embedded-wallets/dynamic-embedded-wallets)
+- Wallet is added as both owner and validator of the Safe Account
+- Currently uses Trusted Execution Environment (TEE) for key management
+- Planned migration to Threshold Signature Scheme (TSS-MPC) for enhanced security
+
+<Note>
+Dynamic Embedded Wallets uses TEE for key management and signing but soon will be ported to TSS-MPC for better security.
+</Note>
+
+### 2. WebAuthn Passkey Authentication
+**Implementation details**:
+- Integrates Rhinestone-attested WebAuthn module
+- Compatible with ERC-7579 specification
+- Originally developed by ZeroDev for Kernel Accounts
+- Custom passkey service for additional platform authentication
+
+<Note>
+We run our own Passkey service to also authenticate the user for various other services.
+</Note>
+
+### 3. External Wallet Authentication
+**Features**:
+- Direct integration with existing crypto wallets
+- Wallet becomes primary signer and validator
+- Supports all major Web3 wallet providers
+- Compatible with both EOA and smart contract wallets
+

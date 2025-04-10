@@ -22,6 +22,7 @@
             {
             "group": "User Documentation",
             "pages": [
+              "users/introduction",
               "users/onboarding",
               "users/transactions",
               "users/security",
@@ -31,10 +32,11 @@
           {
             "group": "Technology Documentation",
             "pages": [
-              "technology/onboarding",
+              "technology/introduction",
+              "technology/accounts",
               "technology/transactions",
               "technology/security",
-              "technology/accounts",
+              "technology/subaccounts",
               "technology/deployments"
             ]
           }
@@ -64,12 +66,12 @@
         {
           "anchor": "Try Now",
           "href": "https://app.brewit.money/",
-          "icon": "book-open-cover"
+          "icon": "rocket-launch"
         },
         {
           "anchor": "Community",
           "href": "https://x.com/brewitmoney",
-          "icon": "twiiter"
+          "icon": "user-group"
         }
       ]
     }

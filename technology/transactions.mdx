@@ -1,0 +1,23 @@
+---
+title: "Transactions"
+description: "Send and swap assets effortlessly"
+---
+
+
+Brewit uses ERC-4337 infra and tools to create and send transactions as user operations.
+
+### User Operation creation
+
+User operation is created for send and swap operations based on the user's intent.
+
+For swap operations, we make use of 0x API to get the best route and quote.
+
+### User Operation Signing
+
+User operation is signed by signer of the smart account based on the authentication method.
+
+### User Operation propagation
+
+User operations collect relevant information uncluding paymaster to sponsor the transactions fee and then send to the bundler.
+
+We make use of Pimlico Paymaster and Bundler to propagate the user operations.

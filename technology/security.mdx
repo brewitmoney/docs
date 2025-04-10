@@ -1,0 +1,57 @@
+---
+title: "Security"
+description: "Powered by battle-tested Safe smart accounts"
+---
+
+# Account Security Architecture
+
+Your Brewit account is secured by a rock-solid Safe smart account — trusted across the crypto ecosystem.
+
+## Smart Account Implementation
+
+Every Brewit account uses:
+- Safe smart account version 1.4.1
+- Account abstraction functionality via:
+  - ERC-4337 adapter
+  - ERC-7579 adapter
+
+## Account Initialization
+
+The account initialization process varies based on the authentication method:
+
+### Embedded Wallet or Crypto Wallet
+- Safe account is initialized with the wallet owner
+- Threshold is set to 1
+
+### Passkey Authentication
+- Safe account is initialized with a burner address (`0x000000000000000000000000000000000000dead`)
+- Threshold is set to 1
+
+## Safe Account Interoperability
+
+The deployed Safe account is compatible with other Safe-compatible wallets and services. However:
+
+- By default, Safe accounts use an embedded wallet as owner
+- This default configuration is not compatible with other Safe-compatible wallets and services
+
+### Customizing Compatibility
+
+Users can enhance compatibility by:
+- Changing the owner address
+- Converting to a multisig account
+- Configuring settings in the Security section
+
+<Note>
+SDK support for these configurations will be available in future releases.
+</Note>
+
+## Security Features
+
+### Multifactor Authentication
+
+Coming soon!
+
+### Account Recovery
+
+Coming soon!
+
