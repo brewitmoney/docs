@@ -5,36 +5,65 @@ description: "Organize multiple accounts however you like"
 
 Create separate accounts for different goals, or set up accounts for friends and family — all by granting permissioned access from your main Brewit account.
 
-### Supported Account Types
+## Subaccounts implementation
 
-Brewit lets you set up permissioned accounts tailored to different use cases. Here are the supported types:
+Brewit uses a flexible session key implementation ([Smart Sessions](https://github.com/erc7579/smartsessions)) to allow users to create subaccounts.
 
-1. **Full Access (Sudo)**
-   - Grant full access to specific tokens on each chain.
-   - Choose between *swap* or *spend* permissions — with no limits — per token.
-   - Brewit displays all tokens with a balance for easy selection.
+<Note>
+Smart Sessions is authored by [Biconomy](https://www.biconomy.io) and [Rhinestone](https://www.rhinestone.wtf) team.
+It is a flexible session management validator implementation for smart accounts, providing granular access control using policies.
+Read more about it [here](https://github.com/erc7579/smartsessions/wiki/Smart-Sessions).
+</Note>
 
-2. **Limited Access**
-   - Set spending limits on a per-token basis.  
-     _Example: Allow 5 USDC out of 100 USDC from your main account._
+Here is how we create and manage subaccounts using Smart Sessions:
 
----
+<Steps>
+  <Step title="Select a policy and conditions">
+    <p>
+      Select a policy and conditions to allow or disallow access to your account based on the type of permission you want to grant.
+      Currently we support 2 types of policies:
+      <ul>
+        <li>
+          <b>Full Access</b> - Allow access to specific tokens to perform unlimited swap or spend operations.
+          Brewit uses [Sudo Policy](https://github.com/erc7579/smartsessions/blob/main/contracts/external/policies/SudoPolicy.sol) for this.
+        </li>
+        <li>
+          <b>Limited Access</b> - Allow access to specific tokens to perform limited spend operations.
+          Brewit uses [ERC20SpendingLimitPolicy](https://github.com/erc7579/smartsessions/blob/main/contracts/external/policies/ERC20SpendingLimitPolicy.sol) for this.
+        </li>
+      </ul>
+      These policies are applied to the subaccount session as action policies.
+    </p>
+  </Step>
+  <Step title="Create a subaccount session">
+    <p>
+      A session is needed to validate the transactions from the subaccount for these policies to work.
+      We allow session validation using several session validators.
+      <ul>
+        <li>
+          <b>[Ownable Session Validator](https://github.com/rhinestonewtf/core-modules/tree/main/src/OwnableValidator)</b> - This validator is used to validate the embedded wallet session of social/ email login auth providers.
+        </li>
+        <li>
+          <b>WebAuthn Passkey validator</b> - This is slightly modified version of the original WebAuthn passkey validator to support the ISessionValidator.
+        </li>
+      </ul>
+    </p>
+  </Step>
+  <Step title="Enable the smart session module">
+    <p>
+      Once the session validator is set, we can create a subaccount session by enabling the smart session module on the smart account and adding the session details to enable the session.
+    </p>
+  </Step>
+  <Step title="Track/ Edit/ Remove the subaccount">
+    <p>
+      We track the session details in the subaccount by querying the particular policy.
+      We also allow the user to edit or remove the subaccount by calling the appropriate functions on the smart session module.
+    </p>
+  </Step>
+</Steps>
 
-### Supported Authentication Methods
+## Smart Sessions integration guide
 
-Choose from a range of authentication options depending on your needs. Brewit currently supports:
+Read more about the Smart Sessions integration guide by Rhinestone [here](https://docs.rhinestone.wtf/module-sdk/modules/smart-sessions).
 
-- **Email Address**
-  - Add and verify an email to grant access — even to new users.  
-    _Ideal for onboarding friends or family._
-
-- **Passkey**
-  - Use an existing or new passkey stored on your phone.  
-    _Great for managing your main account with permissioned access across devices._
-
-- **Existing Brewit User**
-  - Grant access to any existing Brewit user by entering their address or scanning their QR code.
-
----
-
-Once an account is created, you can **track**, **edit**, or **remove** it from your main account — and access it anytime using the chosen authentication method.
+Check out the deployement details for the smart sessions module [here](./deployments).
