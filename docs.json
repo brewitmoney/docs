@@ -19,24 +19,32 @@
               "introduction"
             ]
           },
-            {
-            "group": "User Documentation",
+          {
+            "group": "Build",
             "pages": [
-              "users/overview",
-              "users/onboarding",
-              "users/transactions",
-              "users/security",
-              "users/accounts"
+              "build/overview",
+              "build/account",
+              "build/delegated-account"
+            ]
+          },
+            {
+            "group": "Brewit App",
+            "pages": [
+              "app/overview",
+              "app/onboarding",
+              "app/transactions",
+              "app/security",
+              "app/accounts"
             ]
           },
           {
-            "group": "Technology Documentation",
+            "group": "Technology",
             "pages": [
               "technology/overview",
               "technology/accounts",
               "technology/transactions",
               "technology/security",
-              "technology/subaccounts",
+              "technology/delegated-accounts",
               "technology/deployments"
             ]
           },
