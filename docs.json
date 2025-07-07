@@ -27,6 +27,14 @@
               "build/delegated-account"
             ]
           },
+          {
+            "group": "Tutorials",
+            "pages": [
+              "tutorials/overview",
+              "tutorials/sample-agent"
+            ]
+          },
+
             {
             "group": "Brewit App",
             "pages": [
