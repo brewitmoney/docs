@@ -1,79 +1,326 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Brewit API",
-        "version": "1.0.0"
+      "title": "Brewit API",
+      "contact": {},
+      "version": "1.0"
     },
     "servers": [
-        {
-            "url": "https://api.brewit.money"
-        }
+      {
+        "url": "https://api.brewit.money",
+        "variables": {}
+      }
     ],
-    "components": {
-        "securitySchemes": {
-            "noauthAuth": {
-                "type": "http",
-                "scheme": "noauth"
-            },
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "bearer"
-            }
-        }
-    },
     "paths": {
-        "/badges/{id}": {
-            "get": {
-                "tags": [
-                    "default"
-                ],
-                "summary": "https://api.brewit.money/badges",
-                "security": [
-                    {
-                        "noauthAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true,
-                        "example": "1"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {}
-                        }
-                    }
-                }
+      "/badges/{id}": {
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "List a badge",
+          "operationId": "Listabadge",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "example": 1
+              }
             }
-        },
-        "/badges": {
-            "get": {
-                "tags": [
-                    "default"
-                ],
-                "summary": "https://api.brewit.money/badges Copy",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "content": {
-                            "application/json": {}
-                        }
-                    }
-                }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
             }
+          },
+          "deprecated": false,
+          "security": []
         }
-    }
-}
+      },
+      "/badges": {
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "List all badges",
+          "operationId": "Listallbadges",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/automation/agents/monad": {
+        "post": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Create a Monad Agent task",
+          "operationId": "CreateaMonadAgenttask",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CreateaMonadAgenttaskRequest"
+                    },
+                    {
+                      "example": {
+                        "name": "Monad Agent Job ",
+                        "repeat": 5000,
+                        "payload": {
+                          "toToken": "0x0000000000000000000000000000000000000000",
+                          "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+                          "amount": "0.1234",
+                          "callbackFunc": "autoSwap",
+                          "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+                        },
+                        "enabled": true
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "name": "Monad Agent Job ",
+                  "repeat": 5000,
+                  "payload": {
+                    "toToken": "0x0000000000000000000000000000000000000000",
+                    "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+                    "amount": "0.1234",
+                    "callbackFunc": "autoSwap",
+                    "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+                  },
+                  "enabled": true
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "List all Monad Agent tasks",
+          "operationId": "ListallMonadAgenttasks",
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "enum": [
+                  "application/json"
+                ],
+                "type": "string",
+                "example": "application/json"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/automation/scheduler/jobs/{jobid}": {
+        "delete": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Delete a Scheduled Jobs",
+          "operationId": "DeleteaScheduledJobs",
+          "parameters": [
+            {
+              "name": "jobid",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string",
+                "example": "job_1752060050224_3d40xb3no"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/automation/scheduler/jobs": {
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "List All Scheduled Jobs",
+          "operationId": "ListAllScheduledJobs",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/automation/agents/monad/{jobid}": {
+        "delete": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Delete Monad Agent Job",
+          "operationId": "DeleteMonadAgentJob",
+          "parameters": [
+            {
+              "name": "jobid",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string",
+                "example": "job_1752058797896_hbu4czzie"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "CreateaMonadAgenttaskRequest": {
+          "title": "CreateaMonadAgenttaskRequest",
+          "required": [
+            "name",
+            "repeat",
+            "payload",
+            "enabled"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "repeat": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "payload": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/Payload"
+                },
+                {}
+              ]
+            },
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "example": {
+            "name": "Monad Agent Job ",
+            "repeat": 5000,
+            "payload": {
+              "toToken": "0x0000000000000000000000000000000000000000",
+              "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+              "amount": "0.1234",
+              "callbackFunc": "autoSwap",
+              "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+            },
+            "enabled": true
+          }
+        },
+        "Payload": {
+          "title": "Payload",
+          "required": [
+            "toToken",
+            "fromToken",
+            "amount",
+            "callbackFunc",
+            "accountAddress"
+          ],
+          "type": "object",
+          "properties": {
+            "toToken": {
+              "type": "string"
+            },
+            "fromToken": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "callbackFunc": {
+              "type": "string"
+            },
+            "accountAddress": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "toToken": "0x0000000000000000000000000000000000000000",
+            "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+            "amount": "0.1234",
+            "callbackFunc": "autoSwap",
+            "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearer": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    },
+    "security": [],
+    "tags": [
+      {
+        "name": "Misc",
+        "description": ""
+      }
+    ]
+  }

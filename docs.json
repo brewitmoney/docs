@@ -80,6 +80,20 @@
               "brewit-api/badges/get-all",
               "brewit-api/badges/get"
             ]
+          },
+          {
+            "group": "Automation API",
+            "pages": [
+              {
+                "group": "Monad Agent",
+                "pages": [
+                  "brewit-api/automation/monad/get-all",
+                  "brewit-api/automation/monad/create",
+                  "brewit-api/automation/monad/delete"
+                ]
+              },
+              "brewit-api/automation/get-all"
+            ]
           }
         ]
       }
