@@ -92,7 +92,14 @@
                   "brewit-api/automation/monad/delete"
                 ]
               },
-              "brewit-api/automation/get-all"
+              {
+                "group": "Scheduled Jobs",
+                "pages": [
+                  "brewit-api/automation/scheduler/get-all",
+                  "brewit-api/automation/scheduler/create-job"
+                ]
+              },
+              "brewit-api/automation/info"
             ]
           }
         ]

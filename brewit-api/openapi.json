@@ -1,326 +1,524 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Brewit API",
-      "contact": {},
-      "version": "1.0"
-    },
-    "servers": [
-      {
-        "url": "https://api.brewit.money",
-        "variables": {}
-      }
-    ],
-    "paths": {
-      "/badges/{id}": {
-        "get": {
-          "tags": [
-            "Misc"
-          ],
-          "summary": "List a badge",
-          "operationId": "Listabadge",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "description": "",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "integer",
-                "format": "int32",
-                "example": 1
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "",
-              "headers": {}
-            }
-          },
-          "deprecated": false,
-          "security": []
-        }
-      },
-      "/badges": {
-        "get": {
-          "tags": [
-            "Misc"
-          ],
-          "summary": "List all badges",
-          "operationId": "Listallbadges",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": "",
-              "headers": {}
-            }
-          },
-          "deprecated": false,
-          "security": [
-            {
-              "bearer": []
-            }
-          ]
-        }
-      },
-      "/automation/agents/monad": {
-        "post": {
-          "tags": [
-            "Misc"
-          ],
-          "summary": "Create a Monad Agent task",
-          "operationId": "CreateaMonadAgenttask",
-          "parameters": [],
-          "requestBody": {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Brewit API",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.brewit.money",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/badges/{id}": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "List a badge",
+        "operationId": "Listabadge",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
             "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/CreateaMonadAgenttaskRequest"
-                    },
-                    {
-                      "example": {
-                        "name": "Monad Agent Job ",
-                        "repeat": 5000,
-                        "payload": {
-                          "toToken": "0x0000000000000000000000000000000000000000",
-                          "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
-                          "amount": "0.1234",
-                          "callbackFunc": "autoSwap",
-                          "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
-                        },
-                        "enabled": true
-                      }
-                    }
-                  ]
-                },
-                "example": {
-                  "name": "Monad Agent Job ",
-                  "repeat": 5000,
-                  "payload": {
-                    "toToken": "0x0000000000000000000000000000000000000000",
-                    "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
-                    "amount": "0.1234",
-                    "callbackFunc": "autoSwap",
-                    "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
-                  },
-                  "enabled": true
-                }
-              }
-            },
-            "required": true
-          },
-          "responses": {
-            "200": {
-              "description": "",
-              "headers": {}
-            }
-          },
-          "deprecated": false
-        },
-        "get": {
-          "tags": [
-            "Misc"
-          ],
-          "summary": "List all Monad Agent tasks",
-          "operationId": "ListallMonadAgenttasks",
-          "parameters": [
-            {
-              "name": "Content-Type",
-              "in": "header",
-              "description": "",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "enum": [
-                  "application/json"
-                ],
-                "type": "string",
-                "example": "application/json"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "",
-              "headers": {}
-            }
-          },
-          "deprecated": false
-        }
-      },
-      "/automation/scheduler/jobs/{jobid}": {
-        "delete": {
-          "tags": [
-            "Misc"
-          ],
-          "summary": "Delete a Scheduled Jobs",
-          "operationId": "DeleteaScheduledJobs",
-          "parameters": [
-            {
-              "name": "jobid",
-              "in": "path",
-              "description": "",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string",
-                "example": "job_1752060050224_3d40xb3no"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "",
-              "headers": {}
-            }
-          },
-          "deprecated": false
-        }
-      },
-      "/automation/scheduler/jobs": {
-        "get": {
-          "tags": [
-            "Misc"
-          ],
-          "summary": "List All Scheduled Jobs",
-          "operationId": "ListAllScheduledJobs",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": "",
-              "headers": {}
-            }
-          },
-          "deprecated": false
-        }
-      },
-      "/automation/agents/monad/{jobid}": {
-        "delete": {
-          "tags": [
-            "Misc"
-          ],
-          "summary": "Delete Monad Agent Job",
-          "operationId": "DeleteMonadAgentJob",
-          "parameters": [
-            {
-              "name": "jobid",
-              "in": "path",
-              "description": "",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string",
-                "example": "job_1752058797896_hbu4czzie"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "",
-              "headers": {}
-            }
-          },
-          "deprecated": false
-        }
-      }
-    },
-    "components": {
-      "schemas": {
-        "CreateaMonadAgenttaskRequest": {
-          "title": "CreateaMonadAgenttaskRequest",
-          "required": [
-            "name",
-            "repeat",
-            "payload",
-            "enabled"
-          ],
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "repeat": {
+            "required": true,
+            "style": "simple",
+            "schema": {
               "type": "integer",
-              "format": "int32"
-            },
-            "payload": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/Payload"
-                },
-                {}
-              ]
-            },
-            "enabled": {
-              "type": "boolean"
+              "format": "int32",
+              "example": 1
             }
-          },
-          "example": {
-            "name": "Monad Agent Job ",
-            "repeat": 5000,
-            "payload": {
-              "toToken": "0x0000000000000000000000000000000000000000",
-              "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
-              "amount": "0.1234",
-              "callbackFunc": "autoSwap",
-              "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
-            },
-            "enabled": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
           }
         },
-        "Payload": {
-          "title": "Payload",
-          "required": [
-            "toToken",
-            "fromToken",
-            "amount",
-            "callbackFunc",
-            "accountAddress"
-          ],
-          "type": "object",
-          "properties": {
-            "toToken": {
-              "type": "string"
-            },
-            "fromToken": {
-              "type": "string"
-            },
-            "amount": {
-              "type": "string"
-            },
-            "callbackFunc": {
-              "type": "string"
-            },
-            "accountAddress": {
-              "type": "string"
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/badges": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "List all badges",
+        "operationId": "Listallbadges",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/automation/agents/monad": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Create a Monad Agent task",
+        "operationId": "CreateaMonadAgenttask",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateaMonadAgenttaskRequest"
+                  },
+                  {
+                    "example": {
+                      "name": "Monad Agent Job ",
+                      "repeat": 5000,
+                      "times": 1,
+                      "task": "swap",
+                      "payload": {
+                        "toToken": "0x0000000000000000000000000000000000000000",
+                        "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+                        "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
+                        "amount": "0.1234",
+                        "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+                      },
+                      "enabled": true
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "name": "Monad Agent Job ",
+                "repeat": 5000,
+                "times": 1,
+                "task": "swap",
+                "payload": {
+                  "toToken": "0x0000000000000000000000000000000000000000",
+                  "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+                  "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
+                  "amount": "0.1234",
+                  "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+                },
+                "enabled": true
+              }
             }
           },
-          "example": {
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "List all Monad Agent tasks",
+        "operationId": "ListallMonadAgenttasks",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "enum": [
+                "application/json"
+              ],
+              "type": "string",
+              "example": "application/json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/automation/scheduler/jobs": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Create a Monad Agent task Copy",
+        "operationId": "CreateaMonadAgenttaskCopy",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateaMonadAgenttaskCopyRequest"
+                  },
+                  {
+                    "example": {
+                      "name": "Scheduler Job ",
+                      "repeat": 5000,
+                      "times": 1,
+                      "task": "external",
+                      "payload": {
+                        "callbackUrl": "https://webhook.site/bf9b412a-782d-4fda-90ad-4e3a8ee32659",
+                        "data": {
+                          "name": "koshik"
+                        }
+                      },
+                      "enabled": true
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "name": "Scheduler Job ",
+                "repeat": 5000,
+                "times": 1,
+                "task": "external",
+                "payload": {
+                  "callbackUrl": "https://webhook.site/bf9b412a-782d-4fda-90ad-4e3a8ee32659",
+                  "data": {
+                    "name": "koshik"
+                  }
+                },
+                "enabled": true
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "List All Scheduled Jobs",
+        "operationId": "ListAllScheduledJobs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/automation/info": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Show Agent Info",
+        "operationId": "ShowAgentInfo",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "enum": [
+                "application/json"
+              ],
+              "type": "string",
+              "example": "application/json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/automation/agents/monad/{jobid}": {
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Delete Monad Agent Job",
+        "operationId": "DeleteMonadAgentJob",
+        "parameters": [
+          {
+            "name": "jobid",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "job_1752058797896_hbu4czzie"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/automation/scheduler/jobs/{jobid}": {
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Delete a Scheduled Jobs",
+        "operationId": "DeleteaScheduledJobs",
+        "parameters": [
+          {
+            "name": "jobid",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "job_1752265588673_n37l8iref"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateaMonadAgenttaskRequest": {
+        "title": "CreateaMonadAgenttaskRequest",
+        "required": [
+          "name",
+          "repeat",
+          "times",
+          "task",
+          "payload",
+          "enabled"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "repeat": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "times": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "task": {
+            "type": "string"
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payload"
+              },
+              {}
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "example": {
+          "name": "Monad Agent Job ",
+          "repeat": 5000,
+          "times": 1,
+          "task": "swap",
+          "payload": {
             "toToken": "0x0000000000000000000000000000000000000000",
             "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+            "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
             "amount": "0.1234",
-            "callbackFunc": "autoSwap",
             "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+          },
+          "enabled": true
+        }
+      },
+      "Payload": {
+        "title": "Payload",
+        "required": [
+          "toToken",
+          "fromToken",
+          "amount",
+          "accountAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "toToken": {
+            "type": "string"
+          },
+          "fromToken": {
+            "type": "string"
+          },
+          "validatorSalt": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "accountAddress": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "toToken": "0x0000000000000000000000000000000000000000",
+          "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
+          "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
+          "amount": "0.1234",
+          "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+        }
+      },
+      "CreateaMonadAgenttaskCopyRequest": {
+        "title": "CreateaMonadAgenttaskCopyRequest",
+        "required": [
+          "name",
+          "repeat",
+          "times",
+          "task",
+          "payload",
+          "enabled"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "repeat": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "times": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "task": {
+            "type": "string"
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payload1"
+              },
+              {}
+            ]
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "example": {
+          "name": "Scheduler Job ",
+          "repeat": 5000,
+          "times": 1,
+          "task": "external",
+          "payload": {
+            "callbackUrl": "https://webhook.site/bf9b412a-782d-4fda-90ad-4e3a8ee32659",
+            "data": {
+              "name": "koshik"
+            }
+          },
+          "enabled": true
+        }
+      },
+      "Payload1": {
+        "title": "Payload1",
+        "required": [
+          "callbackUrl",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": "string"
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Data"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "callbackUrl": "https://webhook.site/bf9b412a-782d-4fda-90ad-4e3a8ee32659",
+          "data": {
+            "name": "koshik"
           }
         }
       },
-      "securitySchemes": {
-        "bearer": {
-          "type": "http",
-          "scheme": "bearer"
+      "Data": {
+        "title": "Data",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "koshik"
         }
       }
     },
-    "security": [],
-    "tags": [
-      {
-        "name": "Misc",
-        "description": ""
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
       }
-    ]
-  }
+    }
+  },
+  "security": [],
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}

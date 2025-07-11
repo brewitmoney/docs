@@ -1,25 +1,98 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Complete guide to the Brewit API endpoints and authentication'
 ---
-
 
 ## Welcome
 
-List of endpoints supported by the Brewit API.
+The Brewit API provides programmatic access to Brewit's platform features. This API allows you to manage badges, automate trading tasks, and schedule jobs.
+
+## Base URL
+
+All API requests should be made to:
+```
+https://api.brewit.money
+```
+
+## Available Endpoints
+
+### Badge Management
 
 <Card
   title="Badge Endpoints"
   icon="badge-check"
   href="/brewit-api/badges"
 >
-  View Badge Endpoints
+  Manage user badges and achievements
+</Card>
+
+### Automation & Trading
+
+<Card
+  title="Automation Endpoints"
+  icon="zap"
+  href="/brewit-api/automation"
+>
+  Create and manage automated trading tasks
+</Card>
+
+<Card
+  title="Monad Agent Tasks"
+  icon="bot"
+  href="/brewit-api/automation/monad"
+>
+  Manage Monad Agent trading automation
+</Card>
+
+<Card
+  title="Scheduler Jobs"
+  icon="clock"
+  href="/brewit-api/automation/scheduler"
+>
+  Schedule and manage automated jobs
 </Card>
 
 ## Authentication
 
-
 <Note>
-  Most of the API endpoints need user Bearer tokens. You can fetch this from the application after the authentication 
-.
+  Most API endpoints require Bearer token authentication. You can obtain your authentication token from the Brewit application after logging in.
 </Note>
+
+### Authentication Header
+
+Include your Bearer token in the Authorization header:
+
+```bash
+Authorization: Bearer YOUR_TOKEN_HERE
+```
+
+### Example Request
+
+```bash
+curl -X GET "https://api.brewit.money/badges" \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
+  -H "Content-Type: application/json"
+```
+
+## Response Format
+
+All API responses are returned in JSON format with standard HTTP status codes:
+
+- `200` - Success
+- `400` - Bad Request
+- `401` - Unauthorized
+- `404` - Not Found
+- `500` - Internal Server Error
+
+## Rate Limiting
+
+API requests are subject to rate limiting to ensure fair usage. Please implement appropriate retry logic with exponential backoff in your applications.
+
+## Getting Started
+
+1. **Obtain your API token** from the Brewit application
+2. **Review the endpoint documentation** for the specific features you need
+3. **Test your integration** using the provided examples
+4. **Implement error handling** for production use
+
+For detailed information about each endpoint, please refer to the specific documentation sections above.
