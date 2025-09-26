@@ -85,6 +85,14 @@
             "group": "Automation API",
             "pages": [
               {
+                "group": "Operations",
+                "pages": [
+                  "brewit-api/automation/scheduler/get-all",
+                  "brewit-api/automation/operations/create",
+                  "brewit-api/automation/operations/delete"
+                ]
+              },
+              {
                 "group": "Monad Agent",
                 "pages": [
                   "brewit-api/automation/monad/get-all",

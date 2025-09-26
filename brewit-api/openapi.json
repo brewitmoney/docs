@@ -93,6 +93,7 @@
                         "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
                         "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
                         "amount": "0.1234",
+                        "callbackFunc": "autoSwap",
                         "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
                       },
                       "enabled": true
@@ -110,6 +111,7 @@
                   "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
                   "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
                   "amount": "0.1234",
+                  "callbackFunc": "autoSwap",
                   "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
                 },
                 "enabled": true
@@ -155,6 +157,75 @@
           }
         },
         "deprecated": false
+      }
+    },
+    "/automation/agents/operations": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Create a Agent Task",
+        "operationId": "CreateaAgentTask",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateaAgentTaskRequest"
+                  },
+                  {
+                    "example": {
+                      "name": "Test Job ",
+                      "repeat": 5000,
+                      "times": 1,
+                      "task": "send",
+                      "payload": {
+                        "transfers": [
+                          {
+                            "token": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+                            "to": "0x958543756A4c7AC6fB361f0efBfeCD98E4D297Db",
+                            "amount": "0.001"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "name": "Test Job ",
+                "repeat": 5000,
+                "times": 1,
+                "task": "send",
+                "payload": {
+                  "transfers": [
+                    {
+                      "token": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+                      "to": "0x958543756A4c7AC6fB361f0efBfeCD98E4D297Db",
+                      "amount": "0.001"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/automation/scheduler/jobs": {
@@ -373,6 +444,7 @@
             "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
             "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
             "amount": "0.1234",
+            "callbackFunc": "autoSwap",
             "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
           },
           "enabled": true
@@ -383,7 +455,9 @@
         "required": [
           "toToken",
           "fromToken",
+          "validatorSalt",
           "amount",
+          "callbackFunc",
           "accountAddress"
         ],
         "type": "object",
@@ -400,6 +474,9 @@
           "amount": {
             "type": "string"
           },
+          "callbackFunc": {
+            "type": "string"
+          },
           "accountAddress": {
             "type": "string"
           }
@@ -409,7 +486,108 @@
           "fromToken": "0xf817257fed379853cDe0fa4F97AB987181B1E5Ea",
           "validatorSalt": "0xde0c462c50d03af8df0bc14018a482cf470d99fb581ba4e94a52047988eed2c9",
           "amount": "0.1234",
+          "callbackFunc": "autoSwap",
           "accountAddress": "0x67D29520c6F9579fe4B32dCbA346620846eF98d2"
+        }
+      },
+      "CreateaAgentTaskRequest": {
+        "title": "CreateaAgentTaskRequest",
+        "required": [
+          "name",
+          "repeat",
+          "times",
+          "task",
+          "payload"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "repeat": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "times": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "task": {
+            "type": "string"
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Payload1"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "name": "Test Job ",
+          "repeat": 5000,
+          "times": 1,
+          "task": "send",
+          "payload": {
+            "transfers": [
+              {
+                "token": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+                "to": "0x958543756A4c7AC6fB361f0efBfeCD98E4D297Db",
+                "amount": "0.001"
+              }
+            ]
+          }
+        }
+      },
+      "Payload1": {
+        "title": "Payload1",
+        "required": [
+          "transfers"
+        ],
+        "type": "object",
+        "properties": {
+          "transfers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transfer"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "transfers": [
+            {
+              "token": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+              "to": "0x958543756A4c7AC6fB361f0efBfeCD98E4D297Db",
+              "amount": "0.001"
+            }
+          ]
+        }
+      },
+      "Transfer": {
+        "title": "Transfer",
+        "required": [
+          "token",
+          "to",
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "token": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+          "to": "0x958543756A4c7AC6fB361f0efBfeCD98E4D297Db",
+          "amount": "0.001"
         }
       },
       "CreateaMonadAgenttaskCopyRequest": {
@@ -441,7 +619,7 @@
           "payload": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Payload1"
+                "$ref": "#/components/schemas/Payload2"
               },
               {}
             ]
@@ -464,8 +642,8 @@
           "enabled": true
         }
       },
-      "Payload1": {
-        "title": "Payload1",
+      "Payload2": {
+        "title": "Payload2",
         "required": [
           "callbackUrl",
           "data"
